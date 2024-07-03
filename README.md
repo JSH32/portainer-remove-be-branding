@@ -10,8 +10,8 @@ A while ago Portainer added Business Edition branding all over their Community E
     <th>Fix Applied</th>
   </tr>
   <tr>
-    <td><img src="https://raw.githubusercontent.com/JSH32/portainer-remove-be-branding/master/.github/screenshots/with_branding.png" alt="1" width = 500px></td>
-    <td><img src="https://raw.githubusercontent.com/JSH32/portainer-remove-be-branding/master/.github/screenshots/no_branding.png" alt="2" width = 500px></td>
+    <td><img src="https://raw.githubusercontent.com/JSH32/portainer-remove-be-branding/main/.github/screenshots/with_branding.png" alt="1" width = 500px></td>
+    <td><img src="https://raw.githubusercontent.com/JSH32/portainer-remove-be-branding/main/.github/screenshots/no_branding.png" alt="2" width = 500px></td>
   </tr> 
 </table>
 
