@@ -106,20 +106,26 @@
       },
     ];
 
-    const hideElements = (selectors) => {
-      selectors.forEach((selector) => {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach((el) => {
-          el.style.display = "none";
-        });
-      });
-    };
+    const styleBlockId = 'remove-be-style';
+    let styleBlock = document.getElementById(styleBlockId);
+
+    if (!styleBlock) {
+      styleBlock = document.createElement('style');
+      styleBlock.id = styleBlockId;
+      document.head.appendChild(styleBlock);
+    }
+
+    const cssRules = [];
 
     styles.forEach((style) => {
       if (style.pattern.test(url)) {
-        hideElements(style.selectors);
+        style.selectors.forEach((selector) => {
+          cssRules.push(`${selector} { display: none !important; }`);
+        });
       }
     });
+
+    styleBlock.innerHTML = cssRules.join('\n');
   };
 
   // Apply styles when the document is ready
