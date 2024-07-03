@@ -1,15 +1,28 @@
 # Remove Portainer BE branding
 
-A while ago Portainer added Business Edition branding all over the Community Edition page, urging upgrades and greying out options. It was very annoying for an open source product so I decided to do something about it. This is based on [portainer-ce-clean-layout](https://github.com/adripo/portainer-ce-clean-layout) but uses an actual script to do this for all users and not just those with a Stylus script.
+A while ago Portainer added Business Edition branding all over their Community Edition, urging upgrades and greying out options. It was very annoying for an open source product so I decided to fix it. This is based on [portainer-ce-clean-layout](https://github.com/adripo/portainer-ce-clean-layout) but uses an actual script to do this for all users and not just those with a Stylus script.
+
+## Screenshots
+
+<table>
+  <tr>
+    <th>Regular Portainer</th>
+    <th>Fix Applied</th>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/JSH32/portainer-remove-be-branding/master/.github/screenshots/with_branding.png" alt="1" width = 500px></td>
+    <td><img src="https://raw.githubusercontent.com/JSH32/portainer-remove-be-branding/master/.github/screenshots/no_branding.png" alt="2" width = 500px></td>
+  </tr> 
+</table>
 
 ## How to use?
 
-This is designed to be used with Nginx `sub_filter` which is able to replace sections of certain pages with preprocessing before sending the page to the user, this means that it will be able to be used in a non-invasive way that will continue to work if portainer updates.
+This is designed to be used with Nginx `sub_filter` which is able to replace sections of certain pages with preprocessing before sending the page to the user, this means that it will be able to be used in a non-invasive way that will continue to work even if portainer updates.
 
 <details open>
   <summary><h3>Nginx config</h3></summary>
 
-Here's an example of how this could be used in a classic Nginx config.
+Here's an example of how this could be used in an Nginx config.
 
 ```nginx
 location / {
@@ -21,7 +34,7 @@ location / {
   proxy_set_header Accept-Encoding "";
   sub_filter_once off;
   sub_filter_types text/html;
-  sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding/remove_be.js"></script>';
+  sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding@02d0758cc375cae335a52ee7f5c285df921606a8/remove_be.js"></script>';
 }
 ```
 
@@ -38,10 +51,10 @@ If using [Nginx Proxy Manager](https://nginxproxymanager.com/) you can create a 
 proxy_set_header Accept-Encoding "";
 sub_filter_once off;
 sub_filter_types text/html;
-sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding/remove_be.js"></script>';
+sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding@02d0758cc375cae335a52ee7f5c285df921606a8/remove_be.js"></script>';
 ```
 
-### Screenshot
+### Config Screenshot
 
 ![Custom locations config](https://raw.githubusercontent.com/JSH32/portainer-remove-be-branding/master/.github/screenshots/nginx_proxy_manager.png)
 
