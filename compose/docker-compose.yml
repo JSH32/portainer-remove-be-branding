@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  portainer_proxy:
+    image: nginx:latest
+    restart: always
+    networks:
+      - portainer_proxy
+    ports:
+      - 9000:80
+    volumes:
+      - ./reverse_proxy.conf:/etc/nginx/conf.d/default.conf
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    restart: always
+    networks:
+      - portainer_proxy
+    ports:
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+networks:
+  portainer_proxy:
+
+volumes:
+  portainer_data:
