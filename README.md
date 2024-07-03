@@ -4,4 +4,41 @@ A while ago Portainer added Business Edition branding all over the Community Edi
 
 ## How to install
 
-This is designed to be used with Nginx `sub_filter` which is able to replace sections of certain pages with preprocessing before sending the page to the user.
+This is designed to be used with Nginx `sub_filter` which is able to replace sections of certain pages with preprocessing before sending the page to the user, this means that it will be able to be used in a non-invasive way that will continue to work if portainer updates.
+
+<details open>
+  <summary>Nginx config</summary>
+
+  Here's an example of how this could be used in a classic Nginx config.
+
+  ```nginx
+  location / {
+    proxy_pass http://localhost:9000;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-Host $host;
+    proxy_set_header X-Forwarded-Port $server_port;
+
+    proxy_set_header Accept-Encoding "";
+    sub_filter_once off;
+    sub_filter_types text/html;
+    sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding/remove_be.js"></script>';
+  }
+  ```
+
+  <details>
+    <summary>Nginx Proxy Manager</summary>
+
+    If using [Nginx Proxy Manager](https://nginxproxymanager.com/) you can create a custom location with the same settings and paste the relevant configuration into the advanced config section
+
+    ### Advanced Config
+    ```nginx
+    proxy_set_header Accept-Encoding "";
+    sub_filter_once off;
+    sub_filter_types text/html;
+    sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding/remove_be.js"></script>';
+    ```
+    ### Screenshot
+    ![Custom locations config](https://raw.githubusercontent.com/JSH32/portainer-remove-be-branding/master/.github/screenshots/nginx_proxy_manager.png)
+  </details>
+
+</details>

@@ -1,5 +1,7 @@
 (function () {
   const applyStyles = () => {
+    const url = window.location.href;
+
     // Styles to match based on URL patterns
     const styles = [
       {
@@ -108,13 +110,13 @@
       selectors.forEach((selector) => {
         const elements = document.querySelectorAll(selector);
         elements.forEach((el) => {
-          el.style.display = "none !important";
+          el.style.display = "none";
         });
       });
     };
 
     styles.forEach((style) => {
-      if (style.pattern.test(window.location.href)) {
+      if (style.pattern.test(url)) {
         hideElements(style.selectors);
       }
     });
