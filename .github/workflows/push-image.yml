@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: portainer-proxy
+  IMAGE_NAME: jsh32/portainer-proxy
 
 jobs:
   build-and-push-image:
