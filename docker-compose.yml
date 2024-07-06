@@ -2,14 +2,14 @@ version: "3.8"
 
 services:
   portainer_proxy:
-    image: nginx:latest
+    image: ghcr.io/jsh32/portainer-proxy:latest
     restart: always
+    environment:
+      - PORTAINER_HOSTNAME=portainer
     networks:
       - portainer_proxy
     ports:
       - 9000:80
-    volumes:
-      - ./reverse_proxy.conf:/etc/nginx/conf.d/default.conf
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -24,6 +24,7 @@ services:
 
 networks:
   portainer_proxy:
+
 
 volumes:
   portainer_data:
