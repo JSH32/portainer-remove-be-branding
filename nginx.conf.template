@@ -2,7 +2,7 @@ server {
     listen 80;
 
     location / {
-        proxy_pass          http://portainer:9000;
+        proxy_pass          http://${JELLYFIN_HOSTNAME}:9000;
 
         proxy_set_header    X-Forwarded-Host   $host;
         proxy_set_header    X-Forwarded-Server $host;
@@ -11,12 +11,18 @@ server {
         proxy_set_header    X-Real-IP          $remote_addr;
         proxy_set_header    Host               $host;
 
-        # Enable and configure sub filter.
+        # Cnfigure sub filter.
         proxy_set_header    Accept-Encoding    "";
         sub_filter_once     off;
         sub_filter_types    text/html;
 
         # Replace HTML to include script
-        sub_filter  '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding@02d0758cc375cae335a52ee7f5c285df921606a8/remove_be.js"></script>';
+        sub_filter  '<base id="base"/>' '<base id="base"/><script src="/remove_be.js"></script>';
+    }
+
+    # Serve script locally from same server.
+    location /remove_be.js {
+        root /var/www;
+        try_files /remove_be.js =404;
     }
 }
