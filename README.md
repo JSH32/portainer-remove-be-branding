@@ -17,7 +17,7 @@ A while ago Portainer added Business Edition branding all over their Community E
 
 ## How to use?
 
-_The easiest method is to run Portainer by cloning this repo and using the [compose file](https://github.com/JSH32/portainer-remove-be-branding/tree/main/compose/docker-compose.yml)_
+_The easiest method is to run Portainer by cloning this repo and using the [compose file](https://github.com/JSH32/portainer-remove-be-branding/tree/main/docker-compose.yml) or the proxy image which serves the script locally._
 
 This works by using Nginx's `sub_filter` which is able to replace sections of certain pages with preprocessing before sending the page to the user, this means that it will be able to be used in a non-invasive way that will continue to work even if portainer updates.
 
