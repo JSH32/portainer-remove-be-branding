@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:stable-alpine
 
 COPY nginx.conf.template /etc/nginx/conf.d/default.conf.template
 COPY start-nginx.sh /start-nginx.sh
