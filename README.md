@@ -35,8 +35,7 @@ location / {
 
   proxy_set_header Accept-Encoding "";
   sub_filter_once off;
-  sub_filter_types text/html;
-  sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding@02d0758cc375cae335a52ee7f5c285df921606a8/remove_be.js"></script>';
+  sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding@latest/remove_be.js"></script>';
 }
 ```
 
@@ -52,8 +51,7 @@ If using [Nginx Proxy Manager](https://nginxproxymanager.com/) you can create a 
 ```nginx
 proxy_set_header Accept-Encoding "";
 sub_filter_once off;
-sub_filter_types text/html;
-sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding@02d0758cc375cae335a52ee7f5c285df921606a8/remove_be.js"></script>';
+sub_filter '<base id="base"/>' '<base id="base"/><script src="https://cdn.jsdelivr.net/gh/JSH32/portainer-remove-be-branding@latest/remove_be.js"></script>';
 ```
 
 ### Config Screenshot

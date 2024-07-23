@@ -1,4 +1,23 @@
 (function () {
+  const scriptLog = (message, prefix, groupLogs) => {
+    const logArgs = [
+      `%c${prefix ? prefix : 'ⓘ'} %c[%cPortainer Proxy%c] %c${message}`, 
+      "color: orange; font-weight: bold;",
+      "color: gray; font-weight: bold;",
+      "color: cyan; font-weight: bold;",
+      "color: gray; font-weight: bold;",
+      "color: white; font-weight: normal;"
+    ];
+
+    if (groupLogs) {
+      console.groupCollapsed(...logArgs);
+      groupLogs();
+      console.groupEnd();
+    } else {
+      console.log(...logArgs);
+    }
+  }
+  
   const applyStyles = () => {
     const url = window.location.href;
 
@@ -125,8 +144,19 @@
       }
     });
 
+    
+    if (cssRules.length) {
+      scriptLog("Page state changed, applied dynamic styles", null, () => {
+        console.log(cssRules.join("\n"));
+      })
+    } else {
+      scriptLog("Page state changed, no styles to apply");
+    }
+
     styleBlock.innerHTML = cssRules.join('\n');
   };
+
+  scriptLog("Using portainer-remove-be-branding script, please star at https://github.com/JSH32/portainer-remove-be-branding :)", "ツ")
 
   // Apply styles when the document is ready
   document.addEventListener("DOMContentLoaded", applyStyles);

@@ -3,9 +3,12 @@ version: "3.8"
 services:
   portainer_proxy:
     image: ghcr.io/jsh32/portainer-proxy:latest
+    build: .
     restart: always
     environment:
+      # Defaults that work with this config
       - PORTAINER_HOSTNAME=portainer
+      - PORTAINER_PORT=9000
     networks:
       - portainer_proxy
     ports:

@@ -2,22 +2,21 @@ server {
     listen 80;
 
     location / {
-        proxy_pass          http://${PORTAINER_HOSTNAME}:9000;
+        proxy_pass       http://${PORTAINER_HOSTNAME}:${PORTAINER_PORT};
 
-        proxy_set_header    X-Forwarded-Host   $host;
-        proxy_set_header    X-Forwarded-Server $host;
-        proxy_set_header    X-Forwarded-For    $proxy_add_x_forwarded_for;
-        proxy_set_header    X-Forwarded-Proto  $scheme;
-        proxy_set_header    X-Real-IP          $remote_addr;
-        proxy_set_header    Host               $host;
+        proxy_set_header X-Forwarded-Host   $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto  $scheme;
+        proxy_set_header X-Real-IP          $remote_addr;
+        proxy_set_header Host               $host;
 
         # Cnfigure sub filter.
-        proxy_set_header    Accept-Encoding    "";
-        sub_filter_once     off;
-        sub_filter_types    text/html;
+        proxy_set_header Accept-Encoding    "";
+        sub_filter_once  off;
 
         # Replace HTML to include script
-        sub_filter  '<base id="base"/>' '<base id="base"/><script src="/remove_be.js"></script>';
+        sub_filter '<base id="base"/>' '<base id="base"/><script src="/remove_be.js"></script>';
     }
 
     # Serve script locally from same server.
