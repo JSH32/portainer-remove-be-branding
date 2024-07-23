@@ -2,6 +2,7 @@ FROM nginx:latest
 
 COPY nginx.conf.template /etc/nginx/conf.d/default.conf.template
 COPY start-nginx.sh /start-nginx.sh
+COPY remove_be.js /var/www/remove_be.js
 
 EXPOSE 80
 
